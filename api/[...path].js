@@ -1,40 +1,29 @@
+import fs from 'node:fs/promises'
+import path from 'node:path'
+
+const dbPath = path.join(process.cwd(), 'mock-api', 'db.json')
+
 export default async function handler(request, response) {
-  const baseUrl = process.env.JSON_SERVER_URL
-
-  if (!baseUrl) {
-    return response.status(503).json({ error: 'JSON_SERVER_URL is not configured' })
-  }
-
-  const requestUrl = new URL(request.url, 'http://localhost')
-  const resourcePath = requestUrl.pathname.replace(/^\/api\/?/, '')
-  const upstreamUrl = new URL(`${resourcePath}${requestUrl.search}`, `${baseUrl.replace(/\/$/, '')}/`)
-  const headers = new Headers()
-
-  for (const headerName of ['accept', 'content-type']) {
-    const headerValue = request.headers[headerName]
-    if (headerValue) headers.set(headerName, headerValue)
-  }
-
-  const method = request.method ?? 'GET'
-  const hasBody = !['GET', 'HEAD'].includes(method)
-  const requestBody = typeof request.body === 'string'
-    ? request.body
-    : JSON.stringify(request.body)
-
   try {
-    const upstreamResponse = await fetch(upstreamUrl, {
-      method,
-      headers,
-      body: hasBody ? requestBody : undefined,
+    const db = JSON.parse(await fs.readFile(dbPath, 'utf8'))
+
+    const requestUrl = new URL(request.url, 'http://localhost')
+    const resource = requestUrl.pathname.replace(/^\/api\/?/, '')
+
+    if (!db[resource]) {
+      return response.status(404).json({ error: 'Resource not found' })
+    }
+
+    if (request.method === 'GET') {
+      return response.status(200).json(db[resource])
+    }
+
+    return response.status(405).json({
+      error: 'Write operations are not supported yet',
     })
-
-    response.status(upstreamResponse.status)
-    const contentType = upstreamResponse.headers.get('content-type')
-    if (contentType) response.setHeader('content-type', contentType)
-
-    if (method === 'HEAD') return response.end()
-    return response.send(await upstreamResponse.text())
-  } catch {
-    return response.status(502).json({ error: 'Could not reach the accounting API' })
+  } catch (error) {
+    return response.status(500).json({
+      error: 'Failed to load database',
+    })
   }
 }
