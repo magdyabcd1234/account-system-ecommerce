@@ -8,7 +8,7 @@
     "dev:web": "vite",
     "mock-api": "json-server --watch mock-api/db.json --port 4001",
     "build": "tsc -b && vite build",
-    "test": "node --experimental-strip-types --test src/api/accounting.test.mjs",
+    "test": "node --experimental-strip-types --test src/api/accounting.test.mjs api/proxy.test.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: account-system-api
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: node mock-api/start.mjs
+    disk:
+      name: accounting-data
+      mountPath: /var/data
+      sizeGB: 1

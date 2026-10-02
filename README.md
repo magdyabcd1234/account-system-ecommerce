@@ -73,3 +73,13 @@ export default defineConfig([
 ])
 
 ```
+
+## Deploying the API
+
+Vercel serves the frontend and proxies `/api/*` requests to a separate JSON Server. To deploy both:
+
+1. Create a Render Blueprint from this repository. `render.yaml` creates the API service and a persistent disk; the Starter instance and disk are paid Render resources.
+2. After the service is live, copy its base URL, such as `https://account-system-api.onrender.com`.
+3. In Vercel, add `JSON_SERVER_URL` with that base URL (without `/api`) for the Production environment, then redeploy.
+
+The API initializes `/var/data/db.json` from `mock-api/db.json` on first start and keeps later changes on the persistent disk. The application currently has no authentication, so do not use this public API with real customer or accounting data until access control is added.
