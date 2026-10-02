@@ -1,0 +1,117 @@
+{
+  "customers": [
+    {
+      "name": "احمد مجدي",
+      "email": "magdy299025@gmail.com",
+      "phone": "0124546456",
+      "id": 1
+    },
+    {
+      "name": "اسماء مجدي",
+      "email": "Asmaa112233@gmail.com",
+      "phone": "0145678671",
+      "id": 2
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "سوفت للاجهزة",
+      "category": "خدمات تكنولوجية",
+      "phone": "01205845139",
+      "id": 2
+    },
+    {
+      "name": "خيري للحيوان",
+      "category": "خدمات لحوم",
+      "phone": "456876872",
+      "id": 3
+    },
+    {
+      "name": "مدار لتقنية المعلومات",
+      "category": "خدمات برمجية",
+      "phone": "0123546879",
+      "id": 4
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-2026-0001",
+      "customerId": 1,
+      "customerName": "احمد مجدي",
+      "issueDate": "2026-10-02",
+      "dueDate": "2026-10-02",
+      "amount": 1.07,
+      "paidAmount": 0.03,
+      "status": "partial",
+      "paidAt": "2026-10-02",
+      "payments": [
+        {
+          "id": "INV-2026-0001-PAY-1790909311004",
+          "amount": 0.03,
+          "date": "2026-10-02"
+        }
+      ]
+    },
+    {
+      "id": "INV-2026-0003",
+      "customerId": 1,
+      "customerName": "احمد مجدي",
+      "issueDate": "2026-10-02",
+      "dueDate": "2026-10-02",
+      "amount": 1.03,
+      "paidAmount": 0.04,
+      "status": "partial"
+    },
+    {
+      "id": "INV-2026-0004",
+      "customerId": 2,
+      "customerName": "اسماء مجدي",
+      "issueDate": "2026-10-02",
+      "dueDate": "2026-10-20",
+      "amount": 1.03,
+      "paidAmount": 1.03,
+      "status": "paid",
+      "paidAt": "2026-10-02"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "EXP-2026-001",
+      "description": "تقديم خدمات تكنولوجية اجهزة حاسوبات",
+      "category": "خدمات تكنولوجية",
+      "amount": 0.12,
+      "date": "2026-10-02",
+      "supplierId": 2
+    },
+    {
+      "id": "EXP-2026-002",
+      "description": "للدواجن واللحوم",
+      "category": "خدمات انتاجية",
+      "amount": 0.06,
+      "date": "2026-10-02",
+      "supplierId": 3
+    },
+    {
+      "id": "EXP-2026-003",
+      "description": "للخدمات التكنولولجية والبرمجية",
+      "category": "للبرمجة",
+      "amount": 0.14,
+      "date": "2026-10-02",
+      "supplierId": 4
+    }
+  ],
+  "settings": [
+    {
+      "language": "ar",
+      "defaultDueDays": 18,
+      "businessProfile": {
+        "name": "المجد",
+        "email": "magdy299025@gmail.com",
+        "phone": "01288384265",
+        "taxNumber": "12",
+        "address": "شاوة"
+      },
+      "id": 1
+    }
+  ]
+}
